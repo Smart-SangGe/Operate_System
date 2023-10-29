@@ -38,8 +38,8 @@ while true; do
             for dev in $(lsblk -ln -o NAME,MOUNTPOINT,TRAN | grep 'usb' | awk '$2 {print $1}'); do
             # Check if the device is mounted
                 if mount | grep -q "$dev"; then
-                # Use udisks2 to unmount the device
-                udisksctl unmount -b $dev
+                    # Use udisks2 to unmount the device
+                    udisksctl unmount -b $dev
                 fi
             done
 			echo "All usb drive unmounted"
