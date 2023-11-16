@@ -80,7 +80,7 @@ while true; do
                 echo "Source file does not exist on the USB drive!"
                 exit 1
             fi
-                    # Check if the destination directory exists
+            # Check if the destination directory exists
             if [ ! -d "$destination" ]; then
                 echo "Destination directory does not exist on local storage!"
                 exit 1
