@@ -1,6 +1,7 @@
 # Chapter 3 Memory management
 
 Write a program that will demonstrate the difference between using a local page replacement policy and a global one for the simple case of two processes. You will need a routine that can generate a page reference string based on a statistical model. This model has N states numbered from 0 to N − 1 representing each of the possible page references and a probability pi associated with each state i representing the chance that the next reference is to the same page. Otherwise, the next page reference will be one of the other pages with equal probability.  
+
 (a) Demonstrate that the page reference string-generation routine behaves properly for some small N.  
 (b) Compute the page fault rate for a small example in which there is one process and a fixed number of page frames. Explain why the behavior is correct.  
 (c) Repeat part (b) with two processes with independent page reference sequences and twice as many page frames as in part (b).  
