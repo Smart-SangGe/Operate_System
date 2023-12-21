@@ -4,12 +4,11 @@ N = 30
 
 
 def GenChar(lenth: int, N: int) -> list:
-    # Page Reference List
-    PRlist = []
+    page_reference_list = []
     for _ in range(lenth):
-        PRlist.append(random.randrange(N))
-        
-    return PRlist
+        page_reference_list.append(random.randrange(N))
+
+    return page_reference_list
 
 
 if __name__ == "__main__":
@@ -18,5 +17,5 @@ if __name__ == "__main__":
         N = int(N)
     except:
         N = 30
-    PRlist = GenChar(10, N)
-    print(PRlist)
+    page_reference_list = GenChar(10, N)
+    print(page_reference_list)
