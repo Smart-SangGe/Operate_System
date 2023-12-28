@@ -98,6 +98,11 @@ class FIFOAlgorithm(PageReplacementAlgorithm):
 
     def replace(self, element: int):
         # Implement FIFO algorithm logic
+        
+        # pop first element, push new element at the end
+        page_frame_list = self.page_frame_list[1:]
+        page_frame_list.append(element)
+        self.page_frame_list = page_frame_list
         return self.page_frame_list
 
 
