@@ -77,30 +77,7 @@ class OPTAlgorithm(PageReplacementAlgorithm):
 
                 # 添加当前状态的副本
                 self.return_list.append(self.page_frame_list[:])
-
-        '''
-        for i in range(len(self.page_reference_list)):
-            if self.page_reference_list[i] not in self.page_frame_list:
-                print("frame", self.page_frame_list)
-                # calculate each elements next apperence index
-                for j in range(len(self.page_frame_list)):
-                    try:
-                        counter_list[j] = self.page_reference_list.index(
-                            self.page_frame_list[j], i + 1
-                        )
-                    except ValueError:
-                        counter_list[j] = 0
-                print("counter", counter_list)
-                if 0 not in counter_list:
-                    max_value = max(counter_list)
-                    max_index = counter_list.index(max_value)
-                else:
-                    max_index = counter_list.index(0)
-                self.page_frame_list[max_index] = self.page_reference_list[i]
-                self.return_list.append(self.page_frame_list)    
-        '''
         
-
     def replace(self, element: int):
         # Implement OPT algorithm logic
 
