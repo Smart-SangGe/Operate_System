@@ -63,10 +63,10 @@ class OPTAlgorithm(PageReplacementAlgorithm):
         counter_list = [-1] * len(self.page_frame_list)
         for i in range(len(self.page_reference_list)):
             if self.page_reference_list[i] not in self.page_frame_list:
-                counter_list = [float('inf')] * len(self.page_frame_list)
+                counter_list = [float("inf")] * len(self.page_frame_list)
 
                 for j in range(len(self.page_frame_list)):
-                    if self.page_frame_list[j] in self.page_reference_list[i + 1:]:
+                    if self.page_frame_list[j] in self.page_reference_list[i + 1 :]:
                         counter_list[j] = self.page_reference_list.index(
                             self.page_frame_list[j], i + 1
                         )
@@ -77,7 +77,7 @@ class OPTAlgorithm(PageReplacementAlgorithm):
 
                 # 添加当前状态的副本
                 self.return_list.append(self.page_frame_list[:])
-        
+
     def replace(self, element: int):
         # Implement OPT algorithm logic
 
@@ -97,7 +97,7 @@ class FIFOAlgorithm(PageReplacementAlgorithm):
 
     def replace(self, element: int):
         # Implement FIFO algorithm logic
-        
+
         # pop first element, push new element at the end
         page_frame_list = self.page_frame_list[1:]
         page_frame_list.append(element)
@@ -110,11 +110,27 @@ class LRUAlgorithm(PageReplacementAlgorithm):
         super().__init__()
         self.page_frame_list = page_frame_list
         self.page_reference_list = page_reference_list
-        self.counter = 0
+        self.index = 0
 
     def replace(self, element: int):
         # Implement LRU algorithm logic
-        pass
+
+        # Because there is no way to know the number of hits,
+        # it needs to be tracked within the method
+        while element != self.page_reference_list[self.index]:
+            
+            # pop used element, then store in the end of list
+            used_element = self.page_reference_list[self.index]
+            self.page_frame_list.pop(self.page_frame_list.index(used_element))
+            self.page_frame_list.append((used_element))
+            
+            # At this time, the page hits and the counter increases by one.
+            self.index += 1
+            
+
+        # Find the calling index and prepare to replace
+        self.page_frame_list[0] = element
+        return self.page_frame_list
 
 
 class LFUAlgorithm(PageReplacementAlgorithm):
