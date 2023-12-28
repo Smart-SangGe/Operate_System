@@ -94,7 +94,6 @@ class FIFOAlgorithm(PageReplacementAlgorithm):
         super().__init__()
         self.page_frame_list = page_frame_list
         self.page_reference_list = page_reference_list
-        self.counter = 0
 
     def replace(self, element: int):
         # Implement FIFO algorithm logic
