@@ -14,8 +14,7 @@ def ComputePageFaultRate(
         mode, page_frame_list, page_reference_list
     )
 
-    # Determine whether the replacement algorithm
-    # determines whether to hit
+    # Hit or miss is determined by replacement algorithm
     for i in page_reference_list:
         page_frame_list = algorithm_instance.replace(i)
 
@@ -105,7 +104,7 @@ class FIFOAlgorithm(PageReplacementAlgorithm):
             page_frame_list.append(element)
             self.page_frame_list = page_frame_list
             self.hit_count += 1
-            
+
         return self.page_frame_list
 
 
@@ -192,7 +191,7 @@ class CLOCKAlgorithm(PageReplacementAlgorithm):
 
 if __name__ == "__main__":
     page_reference_list = a.GenChar(100, 10)
-    #page_reference_list = [3, 3, 3, 3, 2, 2, 2, 1, 3, 3]
+    # page_reference_list = [3, 3, 3, 3, 2, 2, 2, 1, 3, 3]
     print(page_reference_list)
     PAGE_FRAME_LENTH = 5
     page_fault_rate = ComputePageFaultRate(
