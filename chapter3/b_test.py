@@ -18,7 +18,7 @@ class TestPageReplacementAlgorithms(unittest.TestCase):
         page_fault_rate = ComputePageFaultRate(
             PAGE_FRAME_LENTH, page_reference_list, mode=0
         )
-        print(page_fault_rate)
+        print("OPT:", page_fault_rate)
 
         self.assertTrue(True)
 
@@ -29,7 +29,7 @@ class TestPageReplacementAlgorithms(unittest.TestCase):
         page_fault_rate = ComputePageFaultRate(
             PAGE_FRAME_LENTH, page_reference_list, mode=1
         )
-        print(page_fault_rate)
+        print("FIFO", page_fault_rate)
 
         self.assertTrue(True)
 
@@ -40,7 +40,7 @@ class TestPageReplacementAlgorithms(unittest.TestCase):
         page_fault_rate = ComputePageFaultRate(
             PAGE_FRAME_LENTH, page_reference_list, mode=2
         )
-        print(page_fault_rate)
+        print("LRU",page_fault_rate)
 
         self.assertTrue(True)
 
@@ -51,7 +51,7 @@ class TestPageReplacementAlgorithms(unittest.TestCase):
         page_fault_rate = ComputePageFaultRate(
             PAGE_FRAME_LENTH, page_reference_list, mode=3
         )
-        print(page_fault_rate)
+        print("LFU", page_fault_rate)
 
         self.assertTrue(True)
 
@@ -62,7 +62,7 @@ class TestPageReplacementAlgorithms(unittest.TestCase):
         page_fault_rate = ComputePageFaultRate(
             PAGE_FRAME_LENTH, page_reference_list, mode=4
         )
-        print(page_fault_rate)
+        print("CLOCK", page_fault_rate)
 
         self.assertTrue(True)
 
@@ -71,9 +71,10 @@ class TestComputePageFaultRate(unittest.TestCase):
     def test_page_fault_rate(self):
         # 测试页面错误率计算
         page_reference_list = a.GenChar(100, 10)
-        page_fault_rate = ComputePageFaultRate(5, page_reference_list, mode=0)
-        # 确保页面错误率在合理范围内
-        self.assertTrue(0 <= page_fault_rate <= 1)
+        for i in range(5):
+            page_fault_rate = ComputePageFaultRate(5, page_reference_list, mode=i)
+            # 确保页面错误率在合理范围内
+            self.assertTrue(0 <= page_fault_rate <= 1)
 
 
 if __name__ == "__main__":
