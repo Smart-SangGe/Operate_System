@@ -16,7 +16,7 @@ def ComputePageFaultRate(
 
     # Hit or miss is determined by replacement algorithm
     for i in page_reference_list:
-        page_frame_list = algorithm_instance.replace(i)
+        algorithm_instance.replace(i)
 
     hit_count = algorithm_instance.hit_count
 
@@ -89,11 +89,9 @@ class OPTAlgorithm(PageReplacementAlgorithm):
             else:
                 result = self.page_frame_list
             self.counter += 1
-            return result
         else:
             # 如果元素已在页面帧列表中，不需要替换
             self.hit_count += 1
-            return self.page_frame_list
 
 
 class FIFOAlgorithm(PageReplacementAlgorithm):
@@ -111,7 +109,7 @@ class FIFOAlgorithm(PageReplacementAlgorithm):
             self.page_frame_list = page_frame_list
             self.hit_count += 1
 
-        return self.page_frame_list
+        
 
 
 class LRUAlgorithm(PageReplacementAlgorithm):
@@ -137,7 +135,7 @@ class LRUAlgorithm(PageReplacementAlgorithm):
 
         # Find the calling index and prepare to replace
         self.page_frame_list[0] = element
-        return self.page_frame_list
+        
 
 
 class LFUAlgorithm(PageReplacementAlgorithm):
@@ -180,7 +178,7 @@ class LFUAlgorithm(PageReplacementAlgorithm):
                 self.frequency_dict[element] = 1
                 self.last_used_index[element] = self.page_reference_list.index(element)
 
-        return self.page_frame_list
+        
 
 
 class CLOCKAlgorithm(PageReplacementAlgorithm):
@@ -197,7 +195,7 @@ class CLOCKAlgorithm(PageReplacementAlgorithm):
 
 if __name__ == "__main__":
     page_reference_list = a.GenChar(100, 10)
-    page_reference_list = [3, 3, 3, 3, 2, 2, 2, 1, 3, 3]
+    #page_reference_list = [3, 3, 3, 3, 2, 2, 2, 1, 3, 3]
     print(page_reference_list)
     PAGE_FRAME_LENTH = 5
     page_fault_rate = ComputePageFaultRate(
