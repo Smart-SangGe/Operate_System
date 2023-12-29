@@ -61,11 +61,13 @@ class OPTAlgorithm(PageReplacementAlgorithm):
 
         # compute all return value
         self.return_list = []
-        counter_list = [-1] * len(self.page_frame_list)
-        for i in range(len(self.page_reference_list)):
-            if self.page_reference_list[i] not in self.page_frame_list:
-                counter_list = [float("inf")] * len(self.page_frame_list)
+        counter_list = [float("inf")] * len(self.page_frame_list)
 
+        for i in range(len(self.page_reference_list)):
+            if (
+                self.page_reference_list[i] not in self.page_frame_list
+                and float("inf") in counter_list
+            ):
                 for j in range(len(self.page_frame_list)):
                     if self.page_frame_list[j] in self.page_reference_list[i + 1 :]:
                         counter_list[j] = self.page_reference_list.index(
@@ -75,19 +77,23 @@ class OPTAlgorithm(PageReplacementAlgorithm):
                 # 找到最远的或未来不会被引用的页面
                 max_index = counter_list.index(max(counter_list))
                 self.page_frame_list[max_index] = self.page_reference_list[i]
-
+                print(self.page_frame_list)
                 # 添加当前状态的副本
                 self.return_list.append(self.page_frame_list[:])
 
     def replace(self, element: int):
         # Implement OPT algorithm logic
-
-        counter = self.counter
-        self.counter += 1
-        try:
-            return self.return_list[counter]
-        except:
-            return self.return_list[counter - 1]
+        if element not in self.page_frame_list:
+            if self.counter < len(self.return_list):
+                result = self.return_list[self.counter]
+            else:
+                result = self.page_frame_list
+            self.counter += 1
+            return result
+        else:
+            # 如果元素已在页面帧列表中，不需要替换
+            self.hit_count += 1
+            return self.page_frame_list
 
 
 class FIFOAlgorithm(PageReplacementAlgorithm):
@@ -191,7 +197,7 @@ class CLOCKAlgorithm(PageReplacementAlgorithm):
 
 if __name__ == "__main__":
     page_reference_list = a.GenChar(100, 10)
-    # page_reference_list = [3, 3, 3, 3, 2, 2, 2, 1, 3, 3]
+    page_reference_list = [3, 3, 3, 3, 2, 2, 2, 1, 3, 3]
     print(page_reference_list)
     PAGE_FRAME_LENTH = 5
     page_fault_rate = ComputePageFaultRate(
