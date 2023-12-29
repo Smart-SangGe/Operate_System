@@ -53,6 +53,7 @@ class PageReplacementAlgorithmFactory:
 
 # Implement specific algorithm classes and their replace methods
 
+
 # mode 0
 class OPTAlgorithm(PageReplacementAlgorithm):
     def __init__(self, page_frame_list: list, page_reference_list: list):
@@ -66,9 +67,7 @@ class OPTAlgorithm(PageReplacementAlgorithm):
         counter_list = [float("inf")] * len(self.page_frame_list)
 
         for i in range(len(self.page_reference_list)):
-            
             if self.page_reference_list[i] not in self.page_frame_list:
-                
                 # Calculate the next reference time of each page
                 for j in range(len(self.page_frame_list)):
                     if self.page_frame_list[j] in self.page_reference_list[i + 1 :]:
@@ -81,7 +80,6 @@ class OPTAlgorithm(PageReplacementAlgorithm):
                 # 找到最远的或未来不会被引用的页面
                 max_index = counter_list.index(max(counter_list))
                 self.page_frame_list[max_index] = self.page_reference_list[i]
-                print("after",self.page_frame_list)
                 # 添加当前状态的副本
                 self.return_list.append(self.page_frame_list[:])
 
@@ -144,7 +142,6 @@ class LFUAlgorithm(PageReplacementAlgorithm):
         super().__init__()
         self.page_frame_list = page_frame_list
         self.page_reference_list = page_reference_list
-        self.counter = 0
         # Initialize any data structures required for LFU
         # 初始化页面频率字典和页面最后访问索引字典
         self.frequency_dict = {page: 0 for page in self.page_frame_list}
@@ -185,16 +182,38 @@ class CLOCKAlgorithm(PageReplacementAlgorithm):
         super().__init__()
         self.page_frame_list = page_frame_list
         self.page_reference_list = page_reference_list
-        self.counter = 0
+        self.reference_bits = {page: 0 for page in self.page_frame_list}
+        self.pointer = 0
 
     def replace(self, element: int):
         # Implement CLOCK algorithm logic
-        pass
+        if element not in self.page_frame_list:
+            while True:
+                # 检查当前指针位置的页面
+                current_page = self.page_frame_list[self.pointer]
+
+                # 如果使用位为0，则替换此页面
+                if self.reference_bits[current_page] == 0:
+                    self.page_frame_list[self.pointer] = element
+                    self.reference_bits[element] = 1  # 设置新页面的使用位为1
+                    # 重置被替换页面的使用位
+                    self.reference_bits[current_page] = 0
+                    break
+                else:
+                    # 如果使用位为1，则设置为0并移动指针
+                    self.reference_bits[current_page] = 0
+                    self.pointer = (self.pointer + 1) % len(self.page_frame_list)
+        else:
+            # 如果页面已在页框列表中，则更新其使用位
+            self.reference_bits[element] = 1
+            self.hit_count += 1  # 增加命中计数
+
+        # 移动指针
+        self.pointer = (self.pointer + 1) % len(self.page_frame_list)
 
 
 if __name__ == "__main__":
     page_reference_list = a.GenChar(100, 10)
-    # page_reference_list = [3, 3, 3, 3, 2, 2, 2, 1, 3, 3]
     print(page_reference_list)
     PAGE_FRAME_LENTH = 5
     page_fault_rate = ComputePageFaultRate(
