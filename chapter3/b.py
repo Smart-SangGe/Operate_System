@@ -13,12 +13,13 @@ def ComputePageFaultRate(
     algorithm_instance = PageReplacementAlgorithmFactory.create_algorithm(
         mode, page_frame_list, page_reference_list
     )
+
+    # Determine whether the replacement algorithm
+    # determines whether to hit
     for i in page_reference_list:
-        # if page not in page frame
-        if i not in page_frame_list:
-            page_frame_list = algorithm_instance.replace(i)
-        else:
-            hit_count += 1
+        page_frame_list = algorithm_instance.replace(i)
+
+    hit_count = algorithm_instance.hit_count
 
     fault_rate = 1 - (hit_count / len(page_reference_list))
     return fault_rate
@@ -27,6 +28,7 @@ def ComputePageFaultRate(
 class PageReplacementAlgorithm:
     def __init__(self):
         # Initialize any required data structures for the algorithm
+        self.hit_count = 0
         pass
 
 
@@ -50,7 +52,7 @@ class PageReplacementAlgorithmFactory:
             return CLOCKAlgorithm(*args, **kwargs)
 
 
-# Implement specific algorithm classes and their replace methods...
+# Implement specific algorithm classes and their replace methods
 class OPTAlgorithm(PageReplacementAlgorithm):
     def __init__(self, page_frame_list: list, page_reference_list: list):
         super().__init__()
@@ -97,11 +99,13 @@ class FIFOAlgorithm(PageReplacementAlgorithm):
 
     def replace(self, element: int):
         # Implement FIFO algorithm logic
-
-        # pop first element, push new element at the end
-        page_frame_list = self.page_frame_list[1:]
-        page_frame_list.append(element)
-        self.page_frame_list = page_frame_list
+        if element not in self.page_frame_list:
+            # pop first element, push new element at the end
+            page_frame_list = self.page_frame_list[1:]
+            page_frame_list.append(element)
+            self.page_frame_list = page_frame_list
+            self.hit_count += 1
+            
         return self.page_frame_list
 
 
@@ -118,15 +122,13 @@ class LRUAlgorithm(PageReplacementAlgorithm):
         # Because there is no way to know the number of hits,
         # it needs to be tracked within the method
         while element != self.page_reference_list[self.index]:
-            
             # pop used element, then store in the end of list
             used_element = self.page_reference_list[self.index]
             self.page_frame_list.pop(self.page_frame_list.index(used_element))
             self.page_frame_list.append((used_element))
-            
+
             # At this time, the page hits and the counter increases by one.
             self.index += 1
-            
 
         # Find the calling index and prepare to replace
         self.page_frame_list[0] = element
@@ -140,11 +142,40 @@ class LFUAlgorithm(PageReplacementAlgorithm):
         self.page_reference_list = page_reference_list
         self.counter = 0
         # Initialize any data structures required for LFU
-        self.counter_dict = {}
+        # 初始化页面频率字典和页面最后访问索引字典
+        self.frequency_dict = {page: 0 for page in self.page_frame_list}
+        self.last_used_index = {page: -1 for page in self.page_frame_list}
 
     def replace(self, element: int):
         # Implement LFU algorithm logic
-        pass
+        # 检查元素是否已经在页框列表中
+        if element in self.page_frame_list:
+            # 增加频率计数
+            self.frequency_dict[element] += 1
+            # 更新最后访问索引
+            self.last_used_index[element] = self.page_reference_list.index(element)
+        else:
+            # 如果页框列表未满，添加元素
+            if len(self.page_frame_list) < len(self.frequency_dict):
+                self.page_frame_list.append(element)
+                self.frequency_dict[element] = 1
+                self.last_used_index[element] = self.page_reference_list.index(element)
+            else:
+                # 找出频率最低且最早访问的页面
+                least_frequently_used = min(
+                    self.frequency_dict,
+                    key=lambda x: (self.frequency_dict[x], self.last_used_index[x]),
+                )
+                # 替换页面
+                index_to_replace = self.page_frame_list.index(least_frequently_used)
+                self.page_frame_list[index_to_replace] = element
+                # 更新频率和最后访问索引
+                self.frequency_dict.pop(least_frequently_used)
+                self.last_used_index.pop(least_frequently_used)
+                self.frequency_dict[element] = 1
+                self.last_used_index[element] = self.page_reference_list.index(element)
+
+        return self.page_frame_list
 
 
 class CLOCKAlgorithm(PageReplacementAlgorithm):
