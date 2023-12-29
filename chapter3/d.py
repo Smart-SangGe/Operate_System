@@ -3,8 +3,8 @@ import b
 
 if __name__ == "__main__":
     # 为两个进程生成页面引用序列
-    page_reference_list_process_1 = a.GenChar(100, 10)
-    page_reference_list_process_2 = a.GenChar(100, 10)
+    page_reference_list_process_1 = a.GenChar(100, 20)
+    page_reference_list_process_2 = a.GenChar(100, 20)
 
     # 使用全局策略，两个进程共享同一个页面框集合
     PAGE_FRAME_LENGTH = 5 * 2  # 页面框数量为原来的两倍
