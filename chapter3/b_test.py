@@ -89,13 +89,24 @@ class TestPageReplacementAlgorithms(unittest.TestCase):
         print("CLOCK", page_fault_rate)
 
         self.assertLessEqual(page_fault_rate, 1)
+        
+    def test_SCRlgorithm(self):
+        # 测试SCR算法
+        page_reference_list = a.GenChar(100, 10)
+        PAGE_FRAME_LENTH = 5
+        page_fault_rate = ComputePageFaultRate(
+            PAGE_FRAME_LENTH, page_reference_list, mode=5
+        )
+        print("SCR", page_fault_rate)
+
+        self.assertLessEqual(page_fault_rate, 1)
 
 
 class TestComputePageFaultRate(unittest.TestCase):
     def test_page_fault_rate(self):
         # 测试页面错误率计算
         page_reference_list = a.GenChar(100, 10)
-        for i in range(5):
+        for i in range(6):
             page_fault_rate = ComputePageFaultRate(5, page_reference_list, mode=i)
             # 确保页面错误率在合理范围内
             self.assertTrue(0 < page_fault_rate <= 1)
