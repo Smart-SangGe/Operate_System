@@ -124,19 +124,16 @@ class LRUAlgorithm(PageReplacementAlgorithm):
     def replace(self, element: int):
         # Implement LRU algorithm logic
 
-        # Because there is no way to know the number of hits,
-        # it needs to be tracked within the method
-        while element != self.page_reference_list[self.index]:
-            # pop used element, then store in the end of list
-            used_element = self.page_reference_list[self.index]
-            self.page_frame_list.pop(self.page_frame_list.index(used_element))
-            self.page_frame_list.append((used_element))
+        if element in self.page_frame_list:
+            self.hit_count += 1
 
-            # At this time, the page hits and the counter increases by one.
-            self.index += 1
+            index = self.page_frame_list.index(element)
+            self.page_frame_list.pop(index)
+            self.page_frame_list.append(element)
 
-        # Find the calling index and prepare to replace
-        self.page_frame_list[0] = element
+        else:
+            self.page_frame_list.pop(0)
+            self.page_frame_list.append(element)
 
 
 # mode 3
@@ -217,8 +214,8 @@ class CLOCKAlgorithm(PageReplacementAlgorithm):
 
 
 if __name__ == "__main__":
-    #page_reference_list = a.GenChar(100, 10)
-    page_reference_list = [0,1,7,2,3,2,7,1,0,3]
+    # page_reference_list = a.GenChar(100, 10)
+    page_reference_list = [0, 1, 7, 2, 3, 2, 7, 1, 0, 3]
     print(page_reference_list)
     PAGE_FRAME_LENTH = 4
     page_fault_rate = ComputePageFaultRate(
