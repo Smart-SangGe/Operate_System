@@ -96,6 +96,7 @@ class OPTAlgorithm(PageReplacementAlgorithm):
             self.hit_count += 1
 
 
+# mode 1
 class FIFOAlgorithm(PageReplacementAlgorithm):
     def __init__(self, page_frame_list: list, page_reference_list: list):
         super().__init__()
@@ -111,6 +112,7 @@ class FIFOAlgorithm(PageReplacementAlgorithm):
             self.hit_count += 1
 
 
+# mode 2
 class LRUAlgorithm(PageReplacementAlgorithm):
     def __init__(self, page_frame_list: list, page_reference_list: list):
         super().__init__()
@@ -136,6 +138,7 @@ class LRUAlgorithm(PageReplacementAlgorithm):
         self.page_frame_list[0] = element
 
 
+# mode 3
 class LFUAlgorithm(PageReplacementAlgorithm):
     def __init__(self, page_frame_list: list, page_reference_list: list):
         super().__init__()
@@ -176,6 +179,7 @@ class LFUAlgorithm(PageReplacementAlgorithm):
                 self.last_used_index[element] = self.page_reference_list.index(element)
 
 
+# mode 4
 class CLOCKAlgorithm(PageReplacementAlgorithm):
     def __init__(self, page_frame_list: list, page_reference_list: list):
         super().__init__()
@@ -212,10 +216,11 @@ class CLOCKAlgorithm(PageReplacementAlgorithm):
 
 
 if __name__ == "__main__":
-    page_reference_list = a.GenChar(100, 10)
+    #page_reference_list = a.GenChar(100, 10)
+    page_reference_list = [0,1,7,2,3,2,7,1,0,3]
     print(page_reference_list)
-    PAGE_FRAME_LENTH = 5
+    PAGE_FRAME_LENTH = 4
     page_fault_rate = ComputePageFaultRate(
-        PAGE_FRAME_LENTH, page_reference_list, mode=0
+        PAGE_FRAME_LENTH, page_reference_list, mode=1
     )
     print(page_fault_rate)
