@@ -33,12 +33,12 @@ class TestPageReplacementAlgorithms(unittest.TestCase):
 
         self.assertTrue(True)
         page_reference_list = [0, 1, 7, 2, 3, 2, 7, 1, 0, 3]
-        PAGE_FRAME_LENTH = 5
+        PAGE_FRAME_LENTH = 4
         page_fault_rate = ComputePageFaultRate(
             PAGE_FRAME_LENTH, page_reference_list, mode=1
         )
         print("FIFO", page_fault_rate)
-        self.assertEqual(page_fault_rate, 0.4)
+        self.assertEqual(page_fault_rate, 0.6)
 
     def test_LRUAlgorithm(self):
         # 测试LRU算法
