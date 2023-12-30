@@ -20,7 +20,7 @@ class TestPageReplacementAlgorithms(unittest.TestCase):
         )
         print("OPT:", page_fault_rate)
 
-        self.assertTrue(True)
+        self.assertNotEqual(page_fault_rate, 1)
 
     def test_FIFOAlgorithm(self):
         # 测试FIFO算法
@@ -49,7 +49,7 @@ class TestPageReplacementAlgorithms(unittest.TestCase):
         )
         print("LRU", page_fault_rate)
 
-        self.assertTrue(True)
+        self.assertNotEqual(page_fault_rate, 1)
 
     def test_LFUAlgorithm(self):
         # 测试LFU算法
@@ -60,7 +60,7 @@ class TestPageReplacementAlgorithms(unittest.TestCase):
         )
         print("LFU", page_fault_rate)
 
-        self.assertTrue(True)
+        self.assertNotEqual(page_fault_rate, 1)
 
     def test_CLOCKAlgorithm(self):
         # 测试CLOCK算法
@@ -71,7 +71,7 @@ class TestPageReplacementAlgorithms(unittest.TestCase):
         )
         print("CLOCK", page_fault_rate)
 
-        self.assertTrue(True)
+        self.assertNotEqual(page_fault_rate, 1)
 
 
 class TestComputePageFaultRate(unittest.TestCase):
