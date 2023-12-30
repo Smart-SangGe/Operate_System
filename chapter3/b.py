@@ -214,6 +214,17 @@ class CLOCKAlgorithm(PageReplacementAlgorithm):
         self.pointer = (self.pointer + 1) % len(self.page_frame_list)
 
 
+# mode 5
+class SCRAlgorithm(PageReplacementAlgorithm):
+    def __init__(self, page_frame_list: list, page_reference_list: list):
+        super().__init__()
+        self.page_frame_list = page_frame_list
+        self.page_reference_list = page_reference_list
+        self.counter_list = [0] * len(self.page_frame_list)
+        
+    def replace(self, element: int):
+        raise ValueError("Unfinish")
+
 if __name__ == "__main__":
     # page_reference_list = a.GenChar(100, 10)
     page_reference_list = [0, 1, 7, 2, 3, 2, 7, 1, 0, 3]
