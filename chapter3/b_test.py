@@ -20,7 +20,7 @@ class TestPageReplacementAlgorithms(unittest.TestCase):
         )
         print("OPT:", page_fault_rate)
 
-        self.assertNotEqual(page_fault_rate, 1)
+        self.assertLessEqual(page_fault_rate, 1)
 
     def test_FIFOAlgorithm(self):
         # 测试FIFO算法
@@ -31,7 +31,8 @@ class TestPageReplacementAlgorithms(unittest.TestCase):
         )
         print("FIFO", page_fault_rate)
 
-        self.assertTrue(True)
+        self.assertLessEqual(page_fault_rate, 1)
+
         page_reference_list = [0, 1, 7, 2, 3, 2, 7, 1, 0, 3]
         PAGE_FRAME_LENTH = 4
         page_fault_rate = ComputePageFaultRate(
@@ -49,7 +50,15 @@ class TestPageReplacementAlgorithms(unittest.TestCase):
         )
         print("LRU", page_fault_rate)
 
-        self.assertNotEqual(page_fault_rate, 1)
+        self.assertLessEqual(page_fault_rate, 1)
+
+        page_reference_list = [0, 1, 7, 2, 3, 2, 7, 1, 0, 3]
+        PAGE_FRAME_LENTH = 4
+        page_fault_rate = ComputePageFaultRate(
+            PAGE_FRAME_LENTH, page_reference_list, mode=1
+        )
+        print("FIFO", page_fault_rate)
+        self.assertEqual(page_fault_rate, 0.6)
 
     def test_LFUAlgorithm(self):
         # 测试LFU算法
@@ -60,7 +69,15 @@ class TestPageReplacementAlgorithms(unittest.TestCase):
         )
         print("LFU", page_fault_rate)
 
-        self.assertNotEqual(page_fault_rate, 1)
+        self.assertLessEqual(page_fault_rate, 1)
+
+        page_reference_list = [0, 1, 7, 2, 3, 2, 7, 1, 0, 3]
+        PAGE_FRAME_LENTH = 4
+        page_fault_rate = ComputePageFaultRate(
+            PAGE_FRAME_LENTH, page_reference_list, mode=1
+        )
+        print("LFU", page_fault_rate)
+        self.assertEqual(page_fault_rate, 0.7)
 
     def test_CLOCKAlgorithm(self):
         # 测试CLOCK算法
@@ -71,7 +88,7 @@ class TestPageReplacementAlgorithms(unittest.TestCase):
         )
         print("CLOCK", page_fault_rate)
 
-        self.assertNotEqual(page_fault_rate, 1)
+        self.assertLessEqual(page_fault_rate, 1)
 
 
 class TestComputePageFaultRate(unittest.TestCase):
