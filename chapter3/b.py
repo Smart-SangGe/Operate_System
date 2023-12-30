@@ -106,9 +106,8 @@ class FIFOAlgorithm(PageReplacementAlgorithm):
         # Implement FIFO algorithm logic
         if element not in self.page_frame_list:
             # pop first element, push new element at the end
-            page_frame_list = self.page_frame_list[1:]
-            page_frame_list.append(element)
-            self.page_frame_list = page_frame_list
+            self.page_frame_list.pop(0)
+            self.page_frame_list.append(element)
             self.hit_count += 1
 
 
