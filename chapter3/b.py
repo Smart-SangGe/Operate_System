@@ -157,6 +157,7 @@ class LFUAlgorithm(PageReplacementAlgorithm):
             self.last_used_index[element] = self.page_reference_list.index(element)
         else:
             # 如果页框列表未满，添加元素
+            # error here
             if len(self.page_frame_list) < len(self.frequency_dict):
                 self.page_frame_list.append(element)
                 self.frequency_dict[element] = 1
