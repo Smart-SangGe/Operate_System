@@ -98,7 +98,7 @@ class TestComputePageFaultRate(unittest.TestCase):
         for i in range(5):
             page_fault_rate = ComputePageFaultRate(5, page_reference_list, mode=i)
             # 确保页面错误率在合理范围内
-            self.assertTrue(0 <= page_fault_rate <= 1)
+            self.assertTrue(0 < page_fault_rate <= 1)
 
 
 if __name__ == "__main__":
