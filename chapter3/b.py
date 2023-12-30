@@ -109,6 +109,7 @@ class FIFOAlgorithm(PageReplacementAlgorithm):
             # pop first element, push new element at the end
             self.page_frame_list.pop(0)
             self.page_frame_list.append(element)
+        else:
             self.hit_count += 1
 
 
