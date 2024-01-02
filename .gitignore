@@ -216,3 +216,4 @@ cython_debug/
 
 win_build
 linux_build
+.vscode/settings.json
