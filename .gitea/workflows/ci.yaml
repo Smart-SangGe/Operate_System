@@ -3,8 +3,8 @@ name: Update Code
 
 on:
   push:
-    branches:
-      - main
+    paths:
+      - 'expriment'
 
 jobs:
   update:
