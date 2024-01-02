@@ -4,8 +4,8 @@ N = 30
 
 
 def GenChar(length: int, N: int) -> list:
-    if N <= 0:
-        raise ValueError("N must be bigger than 0")
+    if N <= 1:
+        raise ValueError("N must be bigger than 1")
     page_reference_list = []
     current_page = random.randrange(N)
 
