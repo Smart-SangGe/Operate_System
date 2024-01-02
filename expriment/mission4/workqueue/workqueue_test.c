@@ -19,7 +19,7 @@ static int __init timewq_init(void)
         printk(KERN_ALERT "Failed to create workqueue_test!\n");
         return -1;
     }
-    INIT_DELAYED_WORK(？); // 请同学们自行补充代码。
+    INIT_DELAYED_WORK(&mywork, work_handle);
     for (; i <= 3; i++)
     {
         queue_delayed_work(queue, &mywork, 5 * HZ);
