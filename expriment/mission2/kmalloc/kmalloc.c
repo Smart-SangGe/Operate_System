@@ -5,7 +5,7 @@ unsigned char *kmallocmem1;
 unsigned char *kmallocmem2;
 static int __init mem_module_init(void)
 {
-    printk("Start kmalloc!\n");
+    printk("Group 10, Start kmalloc!\n");
     kmallocmem1 = (unsigned char *)kmalloc(1024, GFP_KERNEL);
     if (kmallocmem1 != NULL)
     {
