@@ -4,7 +4,7 @@ name: Update Code
 on:
   push:
     paths:
-      - 'expriment'
+      - 'expriment/**'
 
 jobs:
   update:
