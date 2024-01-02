@@ -3,7 +3,7 @@
 MODULE_LICENSE("GPL");
 unsigned char *vmallocmem1;
 unsigned char *vmallocmem2;
-unsigned char *vmallocmem2;
+unsigned char *vmallocmem3;
 static int __init mem_module_init(void)
 {
     printk("Group 10, Start vmalloc!\n");
