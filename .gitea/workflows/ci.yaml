@@ -1,0 +1,22 @@
+
+name: Update Code
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  update:
+    name: Update Code
+    runs-on: ubuntu-latest  
+
+    steps:
+      - name: Use git to deploy website
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USERNAME }}
+          password: ${{ secrets.SERVER_PASSWORD }}
+          script: |
+            cd /root/Operate_System&&git pull       
