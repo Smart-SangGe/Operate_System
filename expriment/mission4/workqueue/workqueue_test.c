@@ -23,7 +23,7 @@ static int __init timewq_init(void)
     for (; i <= 3; i++)
     {
         queue_delayed_work(queue, &mywork, 5 * HZ);
-        ssleep(15);
+        ssleep(5);
     }
     return 0;
 }
