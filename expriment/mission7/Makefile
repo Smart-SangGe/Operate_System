@@ -16,4 +16,4 @@ p2p: p2p_chat.c
 	$(CC) $(CFLAGS) -o $@ $^
 
 clean:
-    rm -f $(TARGETS)
+	rm -f $(TARGETS)
