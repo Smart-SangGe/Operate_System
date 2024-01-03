@@ -2,15 +2,18 @@
 
 CC = gcc
 CFLAGS = -Wall
-TARGETS = server client
+TARGETS = server client p2p
 
 all: $(TARGETS)
 
 server: server.c
-    $(CC) $(CFLAGS) -o $@ $^
+	$(CC) $(CFLAGS) -o $@ $^
 
 client: client.c
-    $(CC) $(CFLAGS) -o $@ $^
+	$(CC) $(CFLAGS) -o $@ $^
+
+p2p: p2p_chat.c
+	$(CC) $(CFLAGS) -lpthread -o $@ $^
 
 clean:
-    rm -f $(TARGETS)
+	rm -f $(TARGETS)
