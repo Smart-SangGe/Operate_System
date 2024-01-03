@@ -9,7 +9,7 @@ static int print(void *data)
     while (!kthread_should_stop())
     {
         printk("Gourp 10, New kthread is running.");
-        msleep(2000);
+        msleep(5000);
     }
     return 0;
 }
