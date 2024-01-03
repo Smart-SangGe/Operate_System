@@ -8,15 +8,15 @@ static int i = 0;
 // work handle
 void work_handle(struct work_struct *work)
 {
-    printk(KERN_ALERT "Hello World!\n");
+    printk(KERN_ALERT "Group 10, Hello World!\n");
 }
 static int __init timewq_init(void)
 {
-    printk(KERN_ALERT "Start workqueue_test module.");
-    queue = create_singlethread_workqueue("workqueue_test");
+    printk(KERN_ALERT "Group 10, Start workqueue_test module.");
+    queue = create_singlethread_workqueue("Group 10, workqueue_test");
     if (queue == NULL)
     {
-        printk(KERN_ALERT "Failed to create workqueue_test!\n");
+        printk(KERN_ALERT "Group 10, Failed to create workqueue_test!\n");
         return -1;
     }
     INIT_DELAYED_WORK(&mywork, work_handle);
@@ -31,7 +31,7 @@ static void __exit timewq_exit(void)
 {
     flush_workqueue(queue);
     destroy_workqueue(queue);
-    printk(KERN_ALERT "Exit workqueue_test module.");
+    printk(KERN_ALERT "Group 10, Exit workqueue_test module.");
 }
 module_init(timewq_init);
 module_exit(timewq_exit);
