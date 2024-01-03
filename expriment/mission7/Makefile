@@ -13,7 +13,7 @@ client: client.c
 	$(CC) $(CFLAGS) -o $@ $^
 
 p2p: p2p_chat.c
-	$(CC) $(CFLAGS) -o $@ $^
+	$(CC) $(CFLAGS) -lpthread -o $@ $^
 
 clean:
 	rm -f $(TARGETS)
