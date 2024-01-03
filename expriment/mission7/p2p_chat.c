@@ -44,6 +44,10 @@ int main(int argc, char *argv[])
         perror("Failed to create thread");
         return 1;
     }
+    else
+    {
+        printf("Receive thread successfully started.\n");
+    }
 
     // 循环发送消息
     while (1)
@@ -78,6 +82,11 @@ void *receive_message(void *socket_desc)
         if (recv_len > 0)
         {
             printf("Received message: %s", buffer);
+            fflush(stdout);
+        }
+        if (recv_len == -1)
+        {
+            perror("recvfrom failed");
         }
     }
 
