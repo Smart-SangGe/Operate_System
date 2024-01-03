@@ -32,6 +32,20 @@ int main(int argc, char *argv[])
         return 1;
     }
 
+    // Set up local address structure
+    struct sockaddr_in local_addr;
+    memset(&local_addr, 0, sizeof(local_addr));
+    local_addr.sin_family = AF_INET;
+    local_addr.sin_port = htons(PORT);
+    local_addr.sin_addr.s_addr = htonl(INADDR_ANY); // Bind to any local address
+
+    // Bind socket to the local address and port
+    if (bind(sock_fd, (struct sockaddr *)&local_addr, sizeof(local_addr)) == -1)
+    {
+        perror("Failed to bind socket");
+        return 1;
+    }
+
     // 设置对等方信息
     memset(&peer_addr, 0, sizeof(peer_addr));
     peer_addr.sin_family = AF_INET;
