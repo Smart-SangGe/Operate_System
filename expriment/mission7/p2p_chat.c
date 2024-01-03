@@ -91,8 +91,6 @@ void *receive_message(void *socket_desc)
 
     while (1)
     {
-        printf("listening for message");
-        fflush(stdout);
         memset(buffer, 0, BUF_SIZE);
         recv_len = recvfrom(sock, buffer, BUF_SIZE, 0, (struct sockaddr *)&sender_addr, &sender_len);
         if (recv_len > 0)
