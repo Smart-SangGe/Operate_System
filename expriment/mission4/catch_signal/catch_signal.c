@@ -7,20 +7,20 @@ void signal_handler(int sig)
     switch (sig)
     {
     case SIGINT:
-        printf("\nGet a signal:SIGINT. You pressed ctrl+c.\n");
+        printf("\nGroup 10, Get a signal:SIGINT. You pressed ctrl+c.\n");
         break;
     case SIGQUIT:
-        printf("\nGet a signal:SIGQUIT. You pressed ctrl+\\.\n");
+        printf("\nGroup 10, Get a signal:SIGQUIT. You pressed ctrl+\\.\n");
         break;
     case SIGTSTP:
-        printf("\nGet a signal: SIGTSTP. You pressed ctrl+z.\n");
+        printf("\nGroup 10, Get a signal:SIGTSTP. You pressed ctrl+z.\n");
         break;
     }
     exit(0);
 }
 int main()
 {
-    printf("Current process ID is %d\n", getpid());
+    printf("Group 10, Current process ID is %d\n", getpid());
     signal(SIGINT, signal_handler);
     signal(SIGQUIT, signal_handler);
     signal(SIGTSTP, signal_handler);
