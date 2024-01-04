@@ -37,7 +37,7 @@ int main(void) {
     char * running = strtok (ratio,"/");
     char * total = strtok (NULL,"/");
 
-    sprintf(content, "<h1>Group 10,梁俊勇 武艳飞</h1>");
+    sprintf(content, "<h1>Group 10,ljy wyf</h1>");
     sprintf(content, "{\"total_threads\": \"%s\", \"loadavg\": [\"%.2f\", \"%.2f\", \"%.2f\"], \"running_threads\": \"%s\"}", total, one, five, ten, running);
 
 
